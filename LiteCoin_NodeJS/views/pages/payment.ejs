@@ -1,0 +1,89 @@
+<html>
+    <% include ../partials/head %>
+    <body> 
+        <!--header-->
+        <% include ../partials/header %>
+        <!---->
+        <div class="container">
+            <!--Menu-->
+            <div class="sub-cate">
+                <div class=" top-nav rsidebar span_1_of_left">
+                    <h3 class="cate">DANH MỤC SẢN PHẨM</h3>
+                    <ul class="menu">
+                        <ul class="kid-menu ">
+                            <li><a href="/products.html">Giày dép</a></li>
+                            <li><a href="/products.html">Áo</a></li>
+                            <li><a href="/products.html">Túi xách</a></li>
+                            <li><a href="/products.html">Váy</a></li>
+                            <li><a href="/products.html">Vòng cổ</a></li>
+                            <li><a href="/products.html">Nước hoa</a></li>
+                            <li class="menu-kid-left"><a href="contact.html">Liên hệ chúng tôi</a></li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class=" chain-grid menu-chain">
+                    <a href="single.html"><img class="img-responsive chain" src="images/wat.jpg" alt=" "></a>	   		     		
+                    <div class="grid-chain-bottom chain-watch">
+                        <span class="actual dolor-left-grid">3 LTE</span>
+                        <span class="reducedfrom">5 LTE</span>  
+                        <h6><a href="single.html">Lorem ipsum dolor</a></h6>  		     			   		     										
+                    </div>
+                </div>
+                <a class="view-all all-product" href="/products.html">XEM TẤT CẢ<span> </span></a> 	
+            </div>
+
+            <div class="register">
+                    <form> 
+                        <div class="  register-top-grid">
+                            <h3>THÔNG TIN THANH TOÁN</h3>
+                            <div class="mation">
+                                <span>Tên tài khoản<label>*</label></span>
+                                <input type="text" id='account' value=""> 
+                            
+                                <span>Shop litecoin Address<label>*</label></span>
+                                <input type="text", value='<%= address %>', id='shopaddress'> 
+    
+                                <span>Số lượng(LTE)<label>*</label></span>
+                                <input type="text" id='amount'> 
+                            </div>
+                            <div class="clearfix"> </div>
+                            
+                        </div>
+                        <button type="button" id='btn'>THANH TOAN</button>
+                    <div class="clearfix"> </div>
+                </form>
+                
+            </div> 
+                
+                <div class="clearfix"> </div>
+                <span id='txid'></span>        	         
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#btn").click(function(){
+                    var account = $('#account').val();
+                    var address = $('#shopaddress').val();
+                    var amount = $('#amount').val();
+                    //alert("Send from: " + account + ' to ' + address );
+                    $.post('/api/sendfrom', {
+                        account: account,
+                        address: address,
+                        amount: amount
+                        },
+                        function(data,status){
+                            if(data.code == null){
+                                alert("Tạo giao dịch thành công, đang chờ tạo block");
+                                $("#txid").html("<a href='/transaction/"+ data.txid +"'>"+ data.txid +"</a>");
+                            }else{
+                                alert("Không đủ tiền để thực hiện giao dịch");
+                            }
+                            
+                    });
+                });
+            });
+           
+        </script>
+        <!--Footer-->
+        <% include ../partials/footer %>     
+    </body>
+</html>

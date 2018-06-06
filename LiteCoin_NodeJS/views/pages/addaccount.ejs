@@ -1,0 +1,60 @@
+<html>
+    <% include ../partials/head %>
+    <body> 
+        <!--header-->
+        <% include ../partials/header %>
+        <!---->
+        <div class="container">
+            <!--Menu-->
+
+            <div class="register">
+                    <form> 
+                        <div class="  register-top-grid">
+                            <h3>THÔNG TIN TAI KHOAN</h3>
+                            <div class="mation">
+                                <span>Username<label>*</label></span>
+                                <input type="text" id='username' value=""> 
+                                
+                                <span>Password<label>*</label></span>
+                                <input type="text" id='password' value=""> 
+
+                            </div>
+                            <div class="clearfix"> </div>
+                            
+                        </div>
+                        <button type="button" id='btn'>TAO TAI KHOAN</button>
+                    <div class="clearfix"> </div>
+                </form>
+                
+            </div> 
+                
+                <div class="clearfix"> </div>
+                <span id='address'></span>        	         
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#btn").click(function(){
+                    var user = $('#username').val();
+                    var pass = $('#password').val();
+                    
+                    $.post('/api/addaccount', {
+                        username: user,
+                        password: pass,
+                        },
+                        function(data, status){
+                            if(data.address != null){
+                                alert("Tạo tai khoan thanh cong");
+                                $("#address").html("<a href='/transaction/"+ data.address +"'>"+ data.address +"</a>");
+                            }else{
+                                alert("Khong tao duoc tai khoan");
+                            }
+                            
+                    });
+                });
+            });
+           
+        </script>
+        <!--Footer-->
+        <% include ../partials/footer %>     
+    </body>
+</html>

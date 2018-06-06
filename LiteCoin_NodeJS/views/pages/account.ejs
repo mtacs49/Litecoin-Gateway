@@ -1,0 +1,74 @@
+<html>
+    <% include ../partials/head %>
+    <body> 
+        <!--header-->
+        <% include ../partials/header %>
+        <!---->
+        <div class="container">
+            <!--Menu-->
+            <div class="sub-cate">
+                <div class=" top-nav rsidebar span_1_of_left">
+                    <h3 class="cate">DANH MỤC SẢN PHẨM</h3>
+                    <ul class="menu">
+                        <ul class="kid-menu ">
+                            <li><a href="/products.html">Giày dép</a></li>
+                            <li><a href="/products.html">Áo</a></li>
+                            <li><a href="/products.html">Túi xách</a></li>
+                            <li><a href="/products.html">Váy</a></li>
+                            <li><a href="/products.html">Vòng cổ</a></li>
+                            <li><a href="/products.html">Nước hoa</a></li>
+                            <li class="menu-kid-left"><a href="contact.html">Liên hệ chúng tôi</a></li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class=" chain-grid menu-chain">
+                    <a href="single.html"><img class="img-responsive chain" src="images/wat.jpg" alt=" "></a>	   		     		
+                    <div class="grid-chain-bottom chain-watch">
+                        <span class="actual dolor-left-grid">3 LTE</span>
+                        <span class="reducedfrom">5 LTE</span>  
+                        <h6><a href="single.html">Lorem ipsum dolor</a></h6>  		     			   		     										
+                    </div>
+                </div>
+                <a class="view-all all-product" href="/products.html">XEM TẤT CẢ<span> </span></a> 	
+            </div>
+
+            <div class="register">
+                <div class="  register-top-grid">
+                    <h3>THÔNG TIN TÀI KHOẢN</h3>
+                    <div class="mation">
+                        <h4>Tên tài khoản: <%= name %></h4>
+                        <div class="clearfix"> </div>
+                        <h4>Tổng số dư TK: <%= balance %> LTE</h4>
+                    </div>
+                    <div class="clearfix"> </div>
+                    
+                    <h3>CÁC ĐỊA CHỈ</h3>
+                    <div class="mation">
+                        <ul>
+                            <% addresses.forEach(function(address) { %>
+                                <li><%= address %></li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <h3>CÁC GIAO DỊCH GẦN </h3>
+                    <div class="mation">
+                        <ul>
+                            <% transactions.forEach(function(transaction) { %>
+                                <li><a href='/transaction/<%= transaction.txid %>'><%= transaction.txid %></a></li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                </div>
+                        
+                    
+            </div> 
+                
+            <div class="clearfix"> </div>        	         
+        </div>
+        
+        <!--Footer-->
+        <% include ../partials/footer %>     
+    </body>
+</html>

@@ -1,0 +1,64 @@
+<html>
+    <% include ../partials/head %>
+    <body> 
+        <!--header-->
+        <% include ../partials/header %>
+        <!---->
+        <div class="container">
+            <!--Menu-->
+
+            <div class="register">
+                    <form> 
+                        <div class="  register-top-grid">
+                            <h3>THÔNG TIN TAI KHOAN</h3>
+                            <div class="mation">
+                                <span>Address<label>*</label></span>
+                                <input type="text" id='address' value=""> 
+                                
+                                <span>To Address<label>*</label></span>
+                                <input type="text" id='toaddress' value=""> 
+
+                                <span>Amount<label>*</label></span>
+                                <input type="text" id='amount' value=""> 
+                            </div>
+                            <div class="clearfix"> </div>
+                            
+                        </div>
+                        <button type="button" id='btn'>THANH TOAN</button>
+                    <div class="clearfix"> </div>
+                </form>
+                
+            </div> 
+                
+                <div class="clearfix"> </div>
+                <span id='hexstring'></span>        	         
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#btn").click(function(){
+                    var address = $('#address').val();
+                    var toaddress = $('#toaddress').val();
+                    var amount = $('#amount').val();
+                    
+                    $.post('/api/createrawtransaction', {
+                        address: address,
+                        toaddress: toaddress,
+                        amount: amount
+                        },
+                        function(data, status){
+                            if(data.txid != null){
+                                alert("Tạo giao dich thanh cong");
+                                $("#hexstring").html("<a href='/transaction/"+ data.txid +"'>"+ data.txid +"</a>");
+                            }else{
+                                alert("Khong tao duoc giao dich");
+                            }
+                            
+                    });
+                });
+            });
+           
+        </script>
+        <!--Footer-->
+        <% include ../partials/footer %>     
+    </body>
+</html>
